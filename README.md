@@ -4,11 +4,11 @@
   <p>把业务结算、资金收付、会计核算、票税资产与经营分析连接成可追溯的财务闭环。</p>
 
   <p>
-    <a href="https://gitee.com/wangyanghub/art-supabase-fms">Gitee</a>
+    <a href="https://gitee.com/hz24931233/art-supabase-fms">Gitee</a>
     ·
     <a href="https://github.com/869123771/art-supabase-fms">GitHub</a>
     ·
-    <a href="https://gitee.com/wangyanghub/art-supabase-pro">主平台</a>
+    <a href="https://gitee.com/hz24931233/art-supabase-pro">主平台</a>
     ·
     <a href="https://869123771.github.io/art-supabase-doc/modules/fms">使用文档</a>
   </p>
@@ -18,7 +18,7 @@
 
 亿企工场 FMS 是亿企工场的财务管理业务应用。它不是孤立的财务页面集合，而是以运输单据和企业经营活动为来源，覆盖结算、资金、核算、报表与高风险反向操作治理。
 
-本仓只维护 FMS 页面、业务 API、领域类型与适配代码。登录、租户、菜单、权限、布局、路由、公共组件、Store 和 Supabase 公共客户端由 [`art-supabase-pro`](https://gitee.com/wangyanghub/art-supabase-pro) 统一提供。
+本仓只维护 FMS 页面、业务 API、领域类型与适配代码。登录、租户、菜单、权限、布局、路由、公共组件、Store 和 Supabase 公共客户端由 [`art-supabase-pro`](https://gitee.com/hz24931233/art-supabase-pro) 统一提供。
 
 ![运输财务工作台](screenshots/finance-workbench.png)
 
