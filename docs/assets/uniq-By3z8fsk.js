@@ -1,0 +1,1 @@
+import{f as e}from"./art-form-BMB2E0by.js";function t(t){return t&&t.length?e(t):[]}export{t};
