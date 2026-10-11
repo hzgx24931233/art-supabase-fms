@@ -41,7 +41,6 @@
     label: string
     value: string
     status: Api.Fms.AccountSetStatus
-    tenantId: string
   }
 
   interface FormGroup {
@@ -67,7 +66,6 @@
 
   const createInitialForm = (): SubjectForm => ({
     id: undefined,
-    tenantId: '',
     accountSetId: '',
     parentId: null,
     subjectCode: '',
@@ -318,7 +316,6 @@
   function createPayload(): SubjectPayload {
     return {
       id: form.data.id,
-      tenantId: form.data.tenantId,
       accountSetId: form.data.accountSetId,
       parentId: form.data.parentId || null,
       subjectCode: form.data.subjectCode.trim(),
@@ -365,7 +362,6 @@
     Object.assign(form.data, createInitialForm(), {
       ...(row ?? {}),
       id: row?.id,
-      tenantId: accountSet.tenantId,
       accountSetId: accountSet.value,
       parentId: row?.parentId ?? null,
       unitName: row?.unitName ?? null,

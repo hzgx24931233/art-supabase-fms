@@ -25,7 +25,7 @@
           placeholder="请选择客户"
           search-placeholder="客户名称、编码、联系人或电话"
           empty-text="暂无可选客户"
-          empty-description="当前租户没有匹配的启用客户，请先维护客户主数据。"
+          empty-description="没有匹配的启用客户，请先维护客户主数据。"
           dialog-width="lg"
           show-pagination
           :page-size="10"

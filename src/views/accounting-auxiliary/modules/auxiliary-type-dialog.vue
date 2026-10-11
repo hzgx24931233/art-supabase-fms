@@ -45,7 +45,6 @@
 
   const createInitialForm = (): FormData => ({
     id: undefined,
-    tenantId: '',
     accountSetId: '',
     typeCode: '',
     typeName: '',
@@ -166,7 +165,6 @@
     Object.assign(form.data, createInitialForm(), {
       ...(row ?? {}),
       id: row?.id,
-      tenantId: accountSet.tenantId,
       accountSetId: accountSet.value,
       remark: row?.remark ?? null
     })

@@ -9,7 +9,6 @@
       ref="ocrPanelRef"
       v-model="form.data.attachments"
       :enabled="state.ocrEnabled"
-      :resource-tenant-id="attachmentTenantId"
       @apply="applyOcrResult"
       @failed="form.data.ocrStatus = 'failed'"
     />
@@ -121,7 +120,6 @@
   import { pageInfoHandler } from '@/utils/table/tableUtils'
   import { canEditField, canViewField } from '@/utils/field-permission'
   import { useDocumentNumberRule } from '@/hooks/core/useDocumentNumberRule'
-  import { useTenantScopeStore } from '@/store/modules/tenantScope'
   import ExpenseOcrPanel from './expense-ocr-panel.vue'
 
   defineOptions({ name: 'FinanceWaybillExpenseDialog' })
@@ -174,10 +172,6 @@
   const selection = reactive<{ waybills: SelectorWaybill[] }>({ waybills: [] })
   const state = reactive({ autoLocateArmed: false, ocrEnabled: true })
   const expenseNumber = useDocumentNumberRule('tms.waybill_cost')
-  const tenantScopeStore = useTenantScopeStore()
-  const attachmentTenantId = computed(
-    () => form.data.tenantId || tenantScopeStore.effectiveTenantId || ''
-  )
   const NEW_RECORD_FIELD_ACCESS: Api.Fms.WaybillCostFieldAccessMap = {
     costAmounts: 'edit',
     paymentDetails: 'edit',

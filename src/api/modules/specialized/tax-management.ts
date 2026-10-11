@@ -23,8 +23,7 @@ export async function fetchTaxPeriodList(params: Api.Fms.TaxPeriodSearchParams =
         p_to: Math.max(to, from),
         p_account_set_id: accountSetId || null,
         p_tax_type: taxType || null,
-        p_status: status || null,
-        p_tenant_id: null
+        p_status: status || null
       }),
     { showErrorMessage: true }
   )
@@ -60,8 +59,7 @@ export async function fetchTaxSummary(accountSetId?: string) {
   return await responseHandle<Api.Fms.TaxSummary>(
     () =>
       supabase.rpc('fms_tax_summary_secure', {
-        p_account_set_id: accountSetId || null,
-        p_tenant_id: null
+        p_account_set_id: accountSetId || null
       }),
     { showErrorMessage: true }
   )

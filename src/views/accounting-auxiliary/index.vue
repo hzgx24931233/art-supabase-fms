@@ -12,7 +12,7 @@
       icon="ri:git-branch-line"
       :tags="[
         { label: '业务主数据同步', type: 'primary' },
-        { label: '租户账套隔离', type: 'success' },
+        { label: '账套隔离', type: 'success' },
         { label: '维度停用留痕', type: 'info' }
       ]"
       :metrics="metrics"

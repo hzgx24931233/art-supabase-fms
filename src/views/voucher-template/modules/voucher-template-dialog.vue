@@ -103,7 +103,7 @@
   const fieldAccess = ref<Api.Fms.VoucherTemplateFieldAccessMap>({})
   const detailLineCount = ref(0)
   const context = reactive<DialogContext>({
-    accountSet: { label: '', value: '', status: 'draft', tenantId: '' },
+    accountSet: { label: '', value: '', status: 'draft' },
     subjects: [],
     currencies: [],
     auxiliaryItems: []

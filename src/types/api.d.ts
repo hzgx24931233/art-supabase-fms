@@ -77,8 +77,6 @@ declare global {
 
       interface AccountSetRecord {
         id: string
-        tenantId: string
-        tenant?: Pick<Api.SystemManage.TenantListItem, 'id' | 'tenantCode' | 'tenantName'> | null
         accountSetCode: string
         accountSetName: string
         legalEntityName: string
@@ -102,7 +100,6 @@ declare global {
 
       type AccountSetSearchParams = Api.Common.CommonSearchParams & {
         keyword?: string
-        tenantId?: string
         status?: AccountSetStatus
       }
 
@@ -117,12 +114,10 @@ declare global {
         label: string
         value: string
         status: AccountSetStatus
-        tenantId: string
       }
 
       interface SaveAccountSetPayload {
         id?: string
-        tenantId: string
         accountSetCode: string
         accountSetName: string
         legalEntityName: string
@@ -139,7 +134,6 @@ declare global {
 
       interface AccountingPeriodRecord {
         id: string
-        tenantId: string
         accountSetId: string
         fiscalYear: number
         periodNo: number
@@ -198,7 +192,6 @@ declare global {
 
       interface SubjectRecord {
         id: string
-        tenantId: string
         accountSetId: string
         parentId?: string | null
         subjectCode: string
@@ -234,17 +227,9 @@ declare global {
 
       type SaveSubjectPayload = Omit<
         SubjectRecord,
-        | 'id'
-        | 'tenantId'
-        | 'level'
-        | 'isSystem'
-        | 'createTime'
-        | 'updateTime'
-        | 'auxiliaryConfigs'
-        | 'children'
+        'id' | 'level' | 'isSystem' | 'createTime' | 'updateTime' | 'auxiliaryConfigs' | 'children'
       > & {
         id?: string
-        tenantId: string
         auxiliaryConfigs: Array<
           Pick<SubjectAuxiliaryConfigRecord, 'auxiliaryTypeId' | 'isRequired' | 'sort'>
         >
@@ -252,7 +237,6 @@ declare global {
 
       interface CurrencyRecord {
         id: string
-        tenantId: string
         accountSetId: string
         currencyCode: string
         currencyName: string
@@ -272,7 +256,6 @@ declare global {
 
       interface ExchangeRateRecord {
         id: string
-        tenantId: string
         accountSetId: string
         currencyId: string
         rateDate: string
@@ -292,7 +275,6 @@ declare global {
 
       interface AuxiliaryTypeRecord {
         id: string
-        tenantId: string
         accountSetId: string
         typeCode: string
         typeName: string
@@ -312,7 +294,6 @@ declare global {
 
       interface AuxiliaryItemRecord {
         id: string
-        tenantId: string
         accountSetId: string
         auxiliaryTypeId: string
         itemCode: string
@@ -420,7 +401,6 @@ declare global {
 
       interface VoucherLineRecord {
         id?: string
-        tenantId?: string
         accountSetId?: string
         voucherId?: string
         lineNo: number
@@ -457,7 +437,6 @@ declare global {
 
       interface VoucherActionRecord {
         id: string
-        tenantId: string
         accountSetId: string
         voucherId: string
         action: VoucherAction
@@ -471,7 +450,6 @@ declare global {
 
       interface VoucherRecord {
         id: string
-        tenantId: string
         accountSetId: string
         accountingPeriodId: string
         voucherNo: string
@@ -569,7 +547,6 @@ declare global {
 
       interface VoucherTemplateLineRecord {
         id?: string
-        tenantId?: string
         accountSetId?: string
         templateId?: string
         lineNo: number
@@ -592,7 +569,6 @@ declare global {
 
       interface VoucherTemplateRecord {
         id: string
-        tenantId: string
         accountSetId: string
         templateCode: string
         templateName: string
@@ -659,7 +635,6 @@ declare global {
 
       interface PostingRuleLineRecord {
         id?: string
-        tenantId?: string
         accountSetId?: string
         ruleId?: string
         lineNo: number
@@ -677,7 +652,6 @@ declare global {
 
       interface PostingRuleRecord {
         id: string
-        tenantId: string
         accountSetId: string
         ruleCode: string
         ruleName: string
@@ -727,7 +701,6 @@ declare global {
 
       interface PostingEventRecord {
         id: string
-        tenantId: string
         accountSetId?: string | null
         sourceType: PostingSourceType
         eventCode: string
@@ -780,9 +753,8 @@ declare global {
 
       interface SecurePostingRuleRecord extends Omit<
         PostingRuleRecord,
-        'tenantId' | 'voucherType' | 'submissionMode' | 'matchConditions' | 'remark' | 'lines'
+        'voucherType' | 'submissionMode' | 'matchConditions' | 'remark' | 'lines'
       > {
-        tenantId?: string
         voucherType?: Exclude<VoucherType, 'reversal'> | '***'
         submissionMode?: PostingSubmissionMode | '***'
         matchConditions?: Record<string, unknown>
@@ -795,7 +767,6 @@ declare global {
 
       interface SecurePostingEventRecord extends Omit<
         PostingEventRecord,
-        | 'tenantId'
         | 'sourceId'
         | 'sourceNo'
         | 'summary'
@@ -811,7 +782,6 @@ declare global {
         | 'rule'
         | 'voucher'
       > {
-        tenantId?: string
         sourceId?: string
         sourceNo?: string | null
         summary?: string | null
@@ -861,7 +831,6 @@ declare global {
 
       interface FundAccountRecord {
         id: string
-        tenantId: string
         accountSetId: string
         currencyId: string
         accountCode: string
@@ -897,7 +866,6 @@ declare global {
 
       type FundAccountSearchParams = Api.Common.CommonSearchParams & {
         accountSetId?: string
-        tenantId?: string
         accountType?: FundAccountType | ''
         status?: FundAccountStatus | ''
         keyword?: string
@@ -927,7 +895,6 @@ declare global {
         id: string
         label: string
         value: string
-        tenantId: string
         accountSetId: string
         currencyId: string
         currencyCode?: string
@@ -954,7 +921,6 @@ declare global {
 
       interface FundLedgerRecord {
         id: string
-        tenantId?: string
         accountSetId: string
         fundAccountId?: string
         entryNo: string
@@ -1003,7 +969,6 @@ declare global {
 
       interface FundTransferRecord {
         id: string
-        tenantId?: string
         accountSetId: string
         transferNo: string
         sourceAccountId?: string
@@ -1044,7 +1009,6 @@ declare global {
 
       interface FundTransferActionRecord {
         id: string
-        tenantId: string
         transferId: string
         action: FundTransferAction
         fromStatus?: FundTransferStatus | null
@@ -1086,7 +1050,6 @@ declare global {
 
       interface BankReconciliationBatchRecord {
         id: string
-        tenantId: string
         accountSetId: string
         fundAccountId: string
         batchNo: string
@@ -1136,7 +1099,6 @@ declare global {
 
       interface BankStatementLineRecord {
         id: string
-        tenantId: string
         accountSetId: string
         batchId: string
         fundAccountId: string
@@ -1165,7 +1127,6 @@ declare global {
 
       interface BankStatementMatchRecord {
         id: string
-        tenantId: string
         statementLineId: string
         ledgerEntryId: string
         matchedAmount?: Api.Fms.SensitiveNumber
@@ -1214,7 +1175,6 @@ declare global {
 
       interface ExpenseReimbursementItem {
         id: string
-        tenantId: string
         reimbursementId: string
         costId: string
         waybillId: string
@@ -1235,7 +1195,6 @@ declare global {
 
       interface ExpenseReimbursementRecord {
         id: string
-        tenantId: string
         reimbursementNo: string
         applicantUserId?: string | null
         applicantNameSnapshot: string
@@ -1400,8 +1359,6 @@ declare global {
 
       interface ExpenseItem {
         id?: string
-        tenantId?: string
-        tenant?: Pick<Api.SystemManage.TenantListItem, 'id' | 'tenantCode' | 'tenantName'> | null
         parentId?: string | null
         itemCode: string
         itemName: string
@@ -1420,7 +1377,6 @@ declare global {
 
       type ExpenseItemSearchParams = Api.Common.CommonSearchParams & {
         keyword?: string
-        tenantId?: string
         parentId?: string | null
         isEnabled?: boolean
       }
@@ -1450,7 +1406,6 @@ declare global {
 
       interface WaybillCostRecord {
         id?: string
-        tenantId?: string
         costNo?: string
         waybillId: string
         expenseItemId: string
@@ -1664,7 +1619,6 @@ declare global {
 
       interface WaybillProfitRecord {
         id: string
-        tenantId: string
         waybillId: string
         orderId?: string | null
         waybillNo: string
@@ -1718,7 +1672,6 @@ declare global {
 
       interface CustomerStatementItem {
         id: string
-        tenantId?: string
         statementId: string
         customerId: string
         waybillId: string
@@ -1741,7 +1694,6 @@ declare global {
 
       interface CustomerStatementRecord {
         id: string
-        tenantId?: string
         statementNo: string
         customerId: string
         customerName: string
@@ -1780,7 +1732,6 @@ declare global {
 
       interface CustomerStatementEligibleWaybill {
         id: string
-        tenantId?: string
         waybillNo: string
         waybillStatus: string
         orderId: string
@@ -1819,7 +1770,6 @@ declare global {
 
       interface CarrierStatementItem {
         id: string
-        tenantId?: string
         statementId: string
         carrierId: string
         costId: string
@@ -1841,7 +1791,6 @@ declare global {
 
       interface CarrierStatementRecord {
         id: string
-        tenantId?: string
         statementNo: string
         carrierId: string
         carrierName: string
@@ -1881,7 +1830,6 @@ declare global {
 
       interface CarrierStatementEligibleCost {
         id: string
-        tenantId?: string
         carrierId: string
         carrierName: string
         waybillId: string
@@ -1939,7 +1887,6 @@ declare global {
 
       interface CashAllocationRecord {
         id: string
-        tenantId: string
         transactionId: string
         statementId: string
         customerId: string
@@ -1965,7 +1912,6 @@ declare global {
 
       interface CashTransactionRecord {
         id: string
-        tenantId: string
         transactionNo: string
         direction: CashDirection
         customerId?: string | null
@@ -2011,7 +1957,6 @@ declare global {
 
       interface CustomerStatementAllocatable {
         id: string
-        tenantId: string
         statementNo: string
         customerId: string
         customerName: string
@@ -2055,7 +2000,6 @@ declare global {
 
       interface CarrierStatementAllocatable {
         id: string
-        tenantId: string
         statementNo: string
         carrierId: string
         carrierName: string
@@ -2079,7 +2023,6 @@ declare global {
 
       interface CarrierCashAllocationRecord {
         id: string
-        tenantId: string
         transactionId: string
         statementId: string
         carrierId: string
@@ -2126,7 +2069,6 @@ declare global {
 
       interface CarrierPaymentApplicationItem {
         id: string
-        tenantId?: string
         applicationId: string
         statementId: string
         carrierId: string
@@ -2143,7 +2085,6 @@ declare global {
 
       interface CarrierPaymentApplicationRecord {
         id: string
-        tenantId?: string
         applicationNo: string
         carrierId: string
         carrierName: string
@@ -2328,7 +2269,6 @@ declare global {
 
       interface InvoiceStatementLinkRecord {
         id: string
-        tenantId?: string
         invoiceId: string
         direction: InvoiceDirection
         statementId: string
@@ -2346,7 +2286,6 @@ declare global {
 
       interface InvoiceRecord {
         id: string
-        tenantId: string
         invoiceRecordNo: string
         direction: InvoiceDirection
         invoiceType: InvoiceType
@@ -2410,7 +2349,6 @@ declare global {
       interface InvoiceableStatement {
         direction: InvoiceDirection
         statementId: string
-        tenantId?: string
         statementNo: string
         counterpartyId: string
         counterpartyName: string
@@ -2841,7 +2779,6 @@ declare global {
 
       interface CommercialBillRecord {
         id: string
-        tenantId: string
         accountSetId: string
         billNo: string
         externalBillNo?: string | null
@@ -2874,7 +2811,6 @@ declare global {
 
       interface CommercialBillEventRecord {
         id: string
-        tenantId: string
         accountSetId: string
         billId: string
         eventType: CommercialBillEventType
@@ -2942,7 +2878,6 @@ declare global {
 
       interface AssetCategoryRecord {
         id: string
-        tenantId: string
         accountSetId: string
         categoryCode: string
         categoryName: string
@@ -2962,7 +2897,6 @@ declare global {
 
       interface FixedAssetRecord {
         id: string
-        tenantId: string
         accountSetId: string
         categoryId: string
         assetNo: string
@@ -3046,7 +2980,6 @@ declare global {
 
       interface AssetDepreciationRunRecord {
         id: string
-        tenantId: string
         accountSetId: string
         accountingPeriodId: string
         runNo: string
@@ -3093,7 +3026,6 @@ declare global {
 
       interface PayrollRunRecord {
         id: string
-        tenantId: string
         accountSetId: string
         accountingPeriodId: string
         runNo: string
@@ -3196,7 +3128,6 @@ declare global {
 
       interface TaxPeriodRecord {
         id: string
-        tenantId: string
         accountSetId: string
         accountingPeriodId: string
         taxType: TaxType
@@ -3283,7 +3214,6 @@ declare global {
 
       interface PeriodCloseRunRecord {
         id: string
-        tenantId: string
         accountSetId: string
         accountingPeriodId: string
         runNo: string
@@ -3345,7 +3275,6 @@ declare global {
 
       interface FinancialStatementMappingRecord {
         id?: string
-        tenantId?: string
         accountSetId?: string
         statementItemId?: string
         subjectId: string
@@ -3359,7 +3288,6 @@ declare global {
 
       interface FinancialStatementFormulaRecord {
         id?: string
-        tenantId?: string
         accountSetId?: string
         targetItemId?: string
         sourceItemId: string
@@ -3374,7 +3302,6 @@ declare global {
 
       interface FinancialStatementItemRecord {
         id: string
-        tenantId?: string
         accountSetId: string
         statementType: FinancialStatementType
         parentId?: string | null
@@ -3441,7 +3368,6 @@ declare global {
 
       interface CashFlowAllocationRecord {
         id: string
-        tenantId?: string
         accountSetId: string
         voucherLineId: string
         statementItemId: string

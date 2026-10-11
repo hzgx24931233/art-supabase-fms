@@ -19,7 +19,6 @@ interface AccountSetListPayload {
 
 interface AccountSetIdentity {
   id: string
-  tenantId: string
   accountSetCode: string
   accountSetName: string
   status: Api.Fms.AccountSetStatus
@@ -31,15 +30,14 @@ interface AccountSetOptionListPayload {
 }
 
 export async function fetchAccountSetList(params: AccountSetSearchParams = {}) {
-  const { from = 0, to = 19, keyword, status, tenantId } = params
+  const { from = 0, to = 19, keyword, status } = params
   const result = await responseHandle<AccountSetListPayload>(
     () =>
       supabase.rpc('fms_list_account_sets_secure', {
         p_from: Math.max(from, 0),
         p_to: Math.max(to, from),
         p_keyword: normalizeNullableText(keyword),
-        p_status: status || null,
-        p_tenant_id: tenantId || null
+        p_status: status || null
       }),
     { showErrorMessage: true }
   )
@@ -51,12 +49,9 @@ export async function fetchAccountSetList(params: AccountSetSearchParams = {}) {
   }
 }
 
-export async function fetchAccountSetOverview(tenantId?: string) {
+export async function fetchAccountSetOverview() {
   return await responseHandle<Api.Fms.AccountSetOverview>(
-    () =>
-      supabase.rpc('fms_get_account_set_overview_secure', {
-        p_tenant_id: tenantId || null
-      }),
+    () => supabase.rpc('fms_get_account_set_overview_secure', {}),
     { showErrorMessage: true }
   )
 }
@@ -69,14 +64,13 @@ export async function fetchAccountSetDetail(id: string) {
 }
 
 export async function fetchAccountSetOptions(params: AccountSetSearchParams = {}) {
-  const { from = 0, to = 999, status, tenantId } = params
+  const { from = 0, to = 999, status } = params
   const result = await responseHandle<AccountSetOptionListPayload>(
     () =>
       supabase.rpc('fms_list_account_set_options_secure', {
         p_from: Math.max(from, 0),
         p_to: Math.max(to, from),
         p_status: status || null,
-        p_tenant_id: tenantId || null,
         p_ids: null
       }),
     { showErrorMessage: true }
@@ -87,8 +81,7 @@ export async function fetchAccountSetOptions(params: AccountSetSearchParams = {}
     data: (result.data?.records ?? []).map((item) => ({
       label: `${item.accountSetName}（${item.accountSetCode}）`,
       value: item.id,
-      status: item.status,
-      tenantId: item.tenantId
+      status: item.status
     }))
   }
 }
@@ -101,7 +94,6 @@ export async function fetchAccountSetIdentities(ids: string[]) {
         p_from: 0,
         p_to: Math.max(ids.length - 1, 0),
         p_status: null,
-        p_tenant_id: null,
         p_ids: ids
       }),
     { showErrorMessage: true }

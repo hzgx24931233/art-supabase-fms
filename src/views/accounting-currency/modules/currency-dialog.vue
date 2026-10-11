@@ -38,7 +38,6 @@
 
   const createInitialForm = (): FormData => ({
     id: undefined,
-    tenantId: '',
     accountSetId: '',
     currencyCode: '',
     currencyName: '',
@@ -134,7 +133,6 @@
       await formRef.value?.validate()
       await saveCurrency({
         id: form.data.id,
-        tenantId: form.data.tenantId,
         accountSetId: form.data.accountSetId,
         currencyCode: form.data.currencyCode.trim().toUpperCase(),
         currencyName: form.data.currencyName.trim(),
@@ -158,7 +156,6 @@
   ): Promise<void> {
     Object.assign(form.data, createInitialForm(), {
       id: row?.id,
-      tenantId: accountSet.tenantId,
       accountSetId: accountSet.value,
       currencyCode: row?.currencyCode ?? '',
       currencyName: row?.currencyName ?? '',

@@ -83,7 +83,6 @@
     initializeAccountingDefaults,
     setAccountSetStatus
   } from '@fms/api'
-  import { fetchGetEnableTenantList } from '@/api/system-manage'
   import AccountSetDialog from './modules/account-set-dialog.vue'
   import AccountingPeriodDrawer from './modules/accounting-period-drawer.vue'
 
@@ -103,7 +102,6 @@
 
   interface TableGroup {
     search: SearchParams
-    tenantOptions: Array<{ label: string; value: string }>
   }
 
   interface OverviewGroup {
@@ -112,7 +110,7 @@
   }
 
   const { confirmAction, promptReason } = useArtFeedback()
-  const { getDictMap, isPlatformSuper } = storeToRefs(useUserStore())
+  const { getDictMap } = storeToRefs(useUserStore())
   const dialogRef = ref<AccountSetDialogExpose>()
   const periodDrawerRef = ref<PeriodDrawerExpose>()
   const tableRef = ref<ArtTableQueryExpose>()
@@ -124,27 +122,11 @@
   const canViewListField = (field: Api.Fms.AccountSetFieldKey): boolean =>
     canViewField(effectiveFieldAccess.value, field)
   const table = reactive<TableGroup>({
-    search: { keyword: '', tenantId: undefined, status: undefined },
-    tenantOptions: []
+    search: { keyword: '', status: undefined }
   })
   const overview = reactive<OverviewGroup>({ loading: true, metrics: [] })
 
   const searchItems = computed<SearchFormItem[]>(() => [
-    ...(isPlatformSuper.value
-      ? [
-          {
-            label: '所属租户',
-            key: 'tenantId',
-            type: 'select' as const,
-            props: {
-              clearable: true,
-              filterable: true,
-              options: table.tenantOptions,
-              placeholder: '全部租户'
-            }
-          }
-        ]
-      : []),
     {
       label: '账套状态',
       key: 'status',
@@ -206,25 +188,6 @@
           </div>
         )
       },
-      ...(isPlatformSuper.value
-        ? [
-            {
-              prop: 'tenant',
-              label: '所属租户',
-              minWidth: 190,
-              formatter: (row: AccountSet) => (
-                <div class="account-set-tenant">
-                  <strong title={row.tenant?.tenantName || '未识别租户'}>
-                    {row.tenant?.tenantName || '未识别租户'}
-                  </strong>
-                  <small title={row.tenant?.tenantCode || row.tenantId} translate="no">
-                    {row.tenant?.tenantCode || row.tenantId}
-                  </small>
-                </div>
-              )
-            } satisfies ColumnOption<AccountSet>
-          ]
-        : []),
       {
         prop: 'legalEntityName',
         label: '法人主体',
@@ -380,7 +343,7 @@
   async function loadOverview(): Promise<void> {
     overview.loading = true
     try {
-      const { data } = await fetchAccountSetOverview(table.search.tenantId)
+      const { data } = await fetchAccountSetOverview()
       const values = data ?? { totalCount: 0, activeCount: 0, draftCount: 0, suspendedCount: 0 }
       const selectedStatus = table.search.status
       overview.metrics = [
@@ -485,26 +448,8 @@
     ])
   }
 
-  async function loadTenantOptions(): Promise<void> {
-    if (!isPlatformSuper.value) return
-    const { data } = await fetchGetEnableTenantList()
-    table.tenantOptions = (data ?? [])
-      .filter((tenant): tenant is Api.SystemManage.TenantListItem & { id: string } =>
-        Boolean(tenant.id)
-      )
-      .map((tenant) => ({
-        label: `${tenant.tenantName}（${tenant.tenantCode}）`,
-        value: tenant.id
-      }))
-  }
-
-  watch(
-    () => table.search.tenantId,
-    () => void loadOverview()
-  )
-
   onMounted(() => {
-    void Promise.all([loadTenantOptions(), loadOverview()])
+    void loadOverview()
   })
 </script>
 
@@ -515,8 +460,7 @@
     }
   }
 
-  :deep(.account-set-identity),
-  :deep(.account-set-tenant) {
+  :deep(.account-set-identity) {
     min-width: 0;
 
     > div {

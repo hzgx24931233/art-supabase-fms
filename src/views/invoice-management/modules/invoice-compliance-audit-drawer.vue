@@ -130,7 +130,7 @@
               <div>
                 <span>疑似重复票号</span>
                 <strong>{{ assessment.metrics.duplicateCount }} 张</strong>
-                <small>同租户未作废记录</small>
+                <small>未作废记录</small>
               </div>
             </article>
             <article class="art-card-xs">

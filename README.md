@@ -18,7 +18,7 @@
 
 程管家 FMS 是程管家的财务管理业务应用。它不是孤立的财务页面集合，而是以运输单据和企业经营活动为来源，覆盖结算、资金、核算、报表与高风险反向操作治理。
 
-本仓只维护 FMS 页面、业务 API、领域类型与适配代码。登录、租户、菜单、权限、布局、路由、公共组件、Store 和 Supabase 公共客户端由 [`art-supabase-pro`](https://gitee.com/hz24931233/art-supabase-pro) 统一提供。
+本仓只维护 FMS 页面、业务 API、领域类型与适配代码。登录、菜单、权限、布局、路由、公共组件、Store 和 Supabase 公共客户端由 [`art-supabase-pro`](https://gitee.com/hz24931233/art-supabase-pro) 统一提供。
 
 ![运输财务工作台](screenshots/finance-workbench.png)
 
@@ -66,7 +66,7 @@ pnpm preview
 
 ## 与主仓协作
 
-FMS 业务修改在本仓提交并推送，随后在主仓更新 `modules/art-supabase-fms` 子模块指针。跨模块读取使用用途明确、字段最小化、租户隔离的 API/RPC 契约；FMS 不直接导入其他业务仓源码，也不复制主平台公共运行时。
+FMS 业务修改在本仓提交并推送，随后在主仓更新 `modules/art-supabase-fms` 子模块指针。跨模块读取使用用途明确、字段最小化的 API/RPC 契约；FMS 不直接导入其他业务仓源码，也不复制主平台公共运行时。
 
 ## 安全原则
 

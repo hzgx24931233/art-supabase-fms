@@ -25,7 +25,7 @@
                   <ElTag :type="riskTagType" effect="dark" round>{{ riskLabel }}</ElTag>
                   <ElTag type="info" effect="plain" round>{{ recommendationLabel }}</ElTag>
                 </div>
-                <p>分析当前租户最近 {{ assessment.metrics.totalWaybills }} 票非作废运单</p>
+                <p>分析最近 {{ assessment.metrics.totalWaybills }} 票非作废运单</p>
               </div>
             </div>
             <ElButton type="primary" plain :loading="state.loading" @click="loadAssessment">

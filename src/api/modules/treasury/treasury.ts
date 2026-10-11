@@ -70,7 +70,7 @@ async function enrichFundAccounts(rows: FundAccount[]): Promise<FundAccount[]> {
 }
 
 export async function fetchFundAccountList(params: Api.Fms.FundAccountSearchParams = {}) {
-  const { accountSetId, accountType, from = 0, keyword, status, tenantId, to = 19 } = params
+  const { accountSetId, accountType, from = 0, keyword, status, to = 19 } = params
   const result = await responseHandle<FundAccountListPayload>(
     () =>
       supabase.rpc('fms_list_fund_accounts_secure', {
@@ -79,8 +79,7 @@ export async function fetchFundAccountList(params: Api.Fms.FundAccountSearchPara
         p_account_set_id: accountSetId || null,
         p_account_type: accountType || null,
         p_status: status || null,
-        p_keyword: normalizeNullableText(keyword),
-        p_tenant_id: tenantId || null
+        p_keyword: normalizeNullableText(keyword)
       }),
     { showErrorMessage: true }
   )
@@ -156,8 +155,7 @@ export async function fetchFundLedgerList(params: Api.Fms.FundLedgerSearchParams
         p_status: params.status || null,
         p_keyword: normalizeNullableText(params.keyword),
         p_entry_start_date: params.entryDateRange?.[0] || null,
-        p_entry_end_date: params.entryDateRange?.[1] || null,
-        p_tenant_id: null
+        p_entry_end_date: params.entryDateRange?.[1] || null
       }),
     { showErrorMessage: true }
   )
@@ -190,8 +188,7 @@ export async function fetchFundTransferList(params: Api.Fms.FundTransferSearchPa
         p_status: status || null,
         p_keyword: normalizeNullableText(keyword),
         p_transfer_start_date: params.transferDateRange?.[0] || null,
-        p_transfer_end_date: params.transferDateRange?.[1] || null,
-        p_tenant_id: null
+        p_transfer_end_date: params.transferDateRange?.[1] || null
       }),
     { showErrorMessage: true }
   )
@@ -267,8 +264,7 @@ export async function fetchBankReconciliationList(
         p_status: status || null,
         p_keyword: normalizeNullableText(keyword),
         p_statement_start_date: params.statementDateRange?.[0] || null,
-        p_statement_end_date: params.statementDateRange?.[1] || null,
-        p_tenant_id: null
+        p_statement_end_date: params.statementDateRange?.[1] || null
       }),
     { showErrorMessage: true }
   )

@@ -129,7 +129,7 @@
   const formRef = ref<FormExpose>()
   const lineTableRef = ref<ArtTableExpose>()
   const context = reactive<DialogContext>({
-    accountSet: { label: '', value: '', status: 'draft', tenantId: '' },
+    accountSet: { label: '', value: '', status: 'draft' },
     subjects: [],
     auxiliaryTypes: [],
     cashFlowItems: []

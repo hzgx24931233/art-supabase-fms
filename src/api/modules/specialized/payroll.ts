@@ -24,8 +24,7 @@ export async function fetchPayrollRunList(params: Api.Fms.PayrollRunSearchParams
         p_from: Math.max(from, 0),
         p_to: Math.max(to, from),
         p_account_set_id: accountSetId || null,
-        p_status: status || null,
-        p_tenant_id: null
+        p_status: status || null
       }),
     { showErrorMessage: true }
   )
@@ -61,8 +60,7 @@ export async function fetchPayrollEmployeeOptions(runId: string) {
   return await responseHandle<Api.Fms.PayrollEmployeeOption[]>(
     () =>
       supabase.rpc('fms_list_payroll_employee_options_secure', {
-        p_run_id: runId,
-        p_tenant_id: null
+        p_run_id: runId
       }),
     { showErrorMessage: true }
   )
@@ -72,8 +70,7 @@ export async function fetchPayrollSummary(accountSetId?: string) {
   return await responseHandle<Api.Fms.PayrollSummary>(
     () =>
       supabase.rpc('fms_payroll_summary_secure', {
-        p_account_set_id: accountSetId || null,
-        p_tenant_id: null
+        p_account_set_id: accountSetId || null
       }),
     { showErrorMessage: true }
   )

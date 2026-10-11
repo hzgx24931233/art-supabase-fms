@@ -179,7 +179,6 @@
     label: string
     value: string
     status: Api.Fms.AccountSetStatus
-    tenantId: string
   }
 
   interface SubjectDialogExpose {

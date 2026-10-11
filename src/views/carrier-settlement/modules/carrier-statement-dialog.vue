@@ -25,7 +25,7 @@
           placeholder="请选择承运商"
           search-placeholder="承运商名称、编码或联系人"
           empty-text="暂无可选承运商"
-          empty-description="当前租户没有匹配的启用承运商，请先维护承运商主数据。"
+          empty-description="没有匹配的启用承运商，请先维护承运商主数据。"
           dialog-width="lg"
           @change="handleCriteriaChange"
         >

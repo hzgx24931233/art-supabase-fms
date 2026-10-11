@@ -114,10 +114,10 @@ const createExpenseItemWritePayload = (params: ExpenseItem) => ({
 })
 
 export async function fetchExpenseItemList(params: ExpenseItemSearchParams = {}) {
-  const { from = 0, to = 999, keyword, tenantId, isEnabled, parentId } = params
+  const { from = 0, to = 999, keyword, isEnabled, parentId } = params
   let query = supabase
     .from('tms_expense_item')
-    .select('*, tenant:sys_tenant!tms_expense_item_tenant_id_fkey(id, tenant_code, tenant_name)', {
+    .select('*', {
       count: 'exact'
     })
     .order('sort', { ascending: true })
@@ -127,7 +127,6 @@ export async function fetchExpenseItemList(params: ExpenseItemSearchParams = {})
     const value = keyword.trim()
     query = query.or(buildOrIlikeFilter(['item_code', 'item_name', 'remark'], value))
   }
-  if (tenantId) query = query.eq('tenant_id', tenantId)
   if (typeof isEnabled === 'boolean') query = query.eq('is_enabled', isEnabled)
   if (parentId === null) query = query.is('parent_id', null)
   else if (parentId) query = query.eq('parent_id', parentId)

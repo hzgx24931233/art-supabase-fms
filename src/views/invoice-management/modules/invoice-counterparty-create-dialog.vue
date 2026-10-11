@@ -130,7 +130,7 @@
   const noticeDescription = computed(() =>
     form.data.requiresReview
       ? '本次识别可信度较低，请逐项核对后再确认。确认建档会复用当前账号已有的客户或承运商新增权限。'
-      : '确认后将按当前租户的税号和完整名称原子查重；已有新增权限即可建档，已存在时直接复用。'
+      : '确认后将按税号和完整名称原子查重；已有新增权限即可建档，已存在时直接复用。'
   )
 
   async function resetForm(): Promise<void> {

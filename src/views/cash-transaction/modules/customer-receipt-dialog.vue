@@ -5,7 +5,6 @@
       ref="ocrPanelRef"
       v-model="form.data.voucherUrls"
       direction="receipt"
-      :resource-tenant-id="tenantScopeStore.effectiveTenantId || ''"
       @apply="handleApplyOcrResult"
     />
     <ArtForm
@@ -33,7 +32,7 @@
           placeholder="请选择收款客户"
           search-placeholder="客户名称、编码、联系人或电话"
           empty-text="暂无可选客户"
-          empty-description="当前租户没有匹配的启用客户，请先维护客户主数据。"
+          empty-description="没有匹配的启用客户，请先维护客户主数据。"
           dialog-width="lg"
           show-pagination
           :page-size="10"
@@ -134,7 +133,6 @@
     reviewCashVoucherOcrArtifact
   } from '@fms/api'
   import { useUserStore } from '@/store/modules/user'
-  import { useTenantScopeStore } from '@/store/modules/tenantScope'
   import { pageInfoHandler } from '@/utils/table/tableUtils'
   import CashVoucherOcrPanel from './cash-voucher-ocr-panel.vue'
   import { useDocumentNumberRule } from '@/hooks/core/useDocumentNumberRule'
@@ -188,7 +186,6 @@
 
   const emit = defineEmits<{ success: [] }>()
   const { getDictMap } = storeToRefs(useUserStore())
-  const tenantScopeStore = useTenantScopeStore()
   const dialogRef = ref<ArtDialogExpose>()
   const formRef = ref<FormExpose>()
   const statementSelectRef = ref<ArtDataSelectExpose>()

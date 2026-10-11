@@ -25,8 +25,7 @@ export async function fetchAssetCategoryList(accountSetId?: string) {
   return await responseHandle<Api.Fms.AssetCategoryRecord[]>(
     () =>
       supabase.rpc('fms_list_asset_categories_secure', {
-        p_account_set_id: accountSetId || null,
-        p_tenant_id: null
+        p_account_set_id: accountSetId || null
       }),
     {
       showErrorMessage: true
@@ -44,8 +43,7 @@ export async function fetchFixedAssetList(params: Api.Fms.FixedAssetSearchParams
         p_account_set_id: accountSetId || null,
         p_category_id: categoryId || null,
         p_status: status || null,
-        p_keyword: normalizeNullableText(keyword),
-        p_tenant_id: null
+        p_keyword: normalizeNullableText(keyword)
       }),
     { showErrorMessage: true }
   )
@@ -68,8 +66,7 @@ export async function fetchAssetDepreciationRuns(accountSetId?: string) {
   const result = await responseHandle<DepreciationRunListPayload>(
     () =>
       supabase.rpc('fms_list_asset_depreciation_runs_secure', {
-        p_account_set_id: accountSetId || null,
-        p_tenant_id: null
+        p_account_set_id: accountSetId || null
       }),
     { showErrorMessage: true }
   )
@@ -97,8 +94,7 @@ export async function fetchFixedAssetSummary(accountSetId?: string, periodId?: s
     () =>
       supabase.rpc('fms_fixed_asset_summary_secure', {
         p_account_set_id: accountSetId || null,
-        p_period_id: periodId || null,
-        p_tenant_id: null
+        p_period_id: periodId || null
       }),
     { showErrorMessage: true }
   )

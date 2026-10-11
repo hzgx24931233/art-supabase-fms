@@ -26,7 +26,6 @@
   import type { ArtDialogExpose } from '@/components/core/dialogs/art-dialog/types'
   import ArtForm, { type FormItem } from '@/components/core/forms/art-form/index.vue'
   import { saveAccountSet } from '@fms/api'
-  import { fetchGetEnableTenantList } from '@/api/system-manage'
   import { useUserStore } from '@/store/modules/user'
   import { canEditField, getFieldAccess, type FieldAccessLevel } from '@/utils/field-permission'
 
@@ -49,7 +48,6 @@
 
   const createInitialForm = (): AccountSetForm => ({
     id: undefined,
-    tenantId: '',
     accountSetCode: '',
     accountSetName: '',
     legalEntityName: '',
@@ -67,7 +65,6 @@
   const form = reactive<FormGroup>({
     data: createInitialForm(),
     rules: {
-      tenantId: [{ required: true, message: '请选择所属租户', trigger: 'change' }],
       accountSetCode: [
         { required: true, message: '请输入账套编码', trigger: 'blur' },
         {
@@ -125,22 +122,6 @@
 
   const formItems = computed<FormItem[]>(() => [
     { label: '核算主体', key: 'entitySection', type: 'divider', span: 24 },
-    {
-      label: '所属租户',
-      key: 'tenantId',
-      type: 'select',
-      span: 24,
-      api: fetchGetEnableTenantList,
-      resultField: 'data',
-      labelField: 'tenantName',
-      valueField: 'id',
-      labelFn: (item) => `${item.tenantName}（${item.tenantCode}）`,
-      props: {
-        placeholder: '请选择账套所属租户',
-        filterable: true,
-        disabled: isEdit.value
-      }
-    },
     {
       label: '账套名称',
       key: 'accountSetName',
@@ -337,7 +318,6 @@
       row
         ? {
             id: row.id,
-            tenantId: row.tenantId,
             accountSetCode: row.accountSetCode,
             accountSetName: row.accountSetName,
             legalEntityName: row.legalEntityName,

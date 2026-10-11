@@ -24,8 +24,7 @@ export async function fetchCommercialBillList(params: Api.Fms.CommercialBillSear
         p_status: status || null,
         p_keyword: normalizeNullableText(keyword),
         p_due_start_date: params.dueDateRange?.[0] || null,
-        p_due_end_date: params.dueDateRange?.[1] || null,
-        p_tenant_id: null
+        p_due_end_date: params.dueDateRange?.[1] || null
       }),
     { showErrorMessage: true }
   )
@@ -55,8 +54,7 @@ export async function fetchCommercialBillSummary(accountSetId?: string) {
   return await responseHandle<Api.Fms.CommercialBillSummary>(
     () =>
       supabase.rpc('fms_commercial_bill_summary_secure', {
-        p_account_set_id: accountSetId || null,
-        p_tenant_id: null
+        p_account_set_id: accountSetId || null
       }),
     { showErrorMessage: true }
   )

@@ -22,8 +22,7 @@ export async function fetchPeriodCloseRuns(params: Api.Fms.PeriodCloseSearchPara
         p_from: Math.max(from, 0),
         p_to: Math.max(to, from),
         p_account_set_id: accountSetId || null,
-        p_status: status || null,
-        p_tenant_id: null
+        p_status: status || null
       }),
     { showErrorMessage: true }
   )
@@ -59,8 +58,7 @@ export async function fetchPeriodCloseSummary(accountSetId?: string) {
   return await responseHandle<Api.Fms.PeriodCloseSummary>(
     () =>
       supabase.rpc('fms_period_close_summary_secure', {
-        p_account_set_id: accountSetId || null,
-        p_tenant_id: null
+        p_account_set_id: accountSetId || null
       }),
     { showErrorMessage: true }
   )

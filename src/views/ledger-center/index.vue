@@ -9,7 +9,7 @@
       :tags="[
         { label: '已记账口径', type: 'primary' },
         { label: '逐级钻取', type: 'success' },
-        { label: '租户数据隔离', type: 'info' }
+        { label: '数据隔离', type: 'info' }
       ]"
       :metrics="metrics"
     >

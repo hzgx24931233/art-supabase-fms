@@ -40,8 +40,6 @@
 </template>
 
 <script setup lang="tsx">
-  import { formatTenantLabel as resolveTenantLabel } from '@/utils/tenant-display'
-
   import { storeToRefs } from 'pinia'
   import type { SearchFormItem } from '@/components/core/forms/art-search-bar/index.vue'
   import type {
@@ -56,7 +54,6 @@
   import { useArtFeedback } from '@/hooks/core/useArtFeedback'
   import { useUserStore } from '@/store/modules/user'
   import { deleteExpenseItem, fetchExpenseItemTree } from '@fms/api'
-  import { fetchGetTenantList } from '@/api/system-manage'
   import BusinessTableWorkspaceActions from '@/components/business/business-table-workspace-actions/index.vue'
   import BusinessWorkspaceHeader from '@/components/business/business-workspace-header/index.vue'
   import ExpenseItemDialog from './modules/expense-item-dialog.vue'
@@ -71,11 +68,10 @@
   }
 
   const { confirmAction } = useArtFeedback()
-  const { getDictMap, isPlatformSuper } = storeToRefs(useUserStore())
+  const { getDictMap } = storeToRefs(useUserStore())
   const tableRef = ref<ArtTableQueryExpose>()
   const dialogRef = ref<DialogExpose>()
-  const search = ref<SearchParams>({ keyword: '', tenantId: undefined, isEnabled: undefined })
-  const tenantOptions = ref<Array<{ label: string; value: string }>>([])
+  const search = ref<SearchParams>({ keyword: '', isEnabled: undefined })
 
   const commonBooleanOptions = computed(() =>
     (getDictMap.value.commonBoolean ?? []).map((item) => ({
@@ -85,21 +81,6 @@
   )
 
   const searchItems = computed<SearchFormItem[]>(() => [
-    ...(isPlatformSuper.value
-      ? [
-          {
-            label: '所属租户',
-            key: 'tenantId',
-            type: 'select' as const,
-            props: {
-              clearable: true,
-              filterable: true,
-              options: tenantOptions.value,
-              placeholder: '全部租户'
-            }
-          }
-        ]
-      : []),
     {
       label: '启用状态',
       key: 'isEnabled',
@@ -130,25 +111,6 @@
 
   const columnsFactory = (): ColumnOption<ExpenseItem>[] => [
     { prop: 'itemName', label: '费用项目', minWidth: 220, fixed: 'left' },
-    ...(isPlatformSuper.value
-      ? [
-          {
-            prop: 'tenant',
-            label: '所属租户',
-            minWidth: 190,
-            formatter: (row: ExpenseItem) => (
-              <div class="expense-item-tenant">
-                <strong title={row.tenant?.tenantName || '未识别租户'}>
-                  {row.tenant?.tenantName || '未识别租户'}
-                </strong>
-                <small title={row.tenant?.tenantCode || row.tenantId || '--'} translate="no">
-                  {row.tenant?.tenantCode || row.tenantId || '--'}
-                </small>
-              </div>
-            )
-          } satisfies ColumnOption<ExpenseItem>
-        ]
-      : []),
     { prop: 'itemCode', label: '项目编码', width: 170 },
     {
       prop: 'businessCategory',
@@ -229,10 +191,9 @@
 
   async function handleDelete(row: ExpenseItem): Promise<void> {
     if (!row.id) return
-    const tenantContext = isPlatformSuper.value ? `所属租户：${resolveTenantLabel(row)}。` : ''
     try {
       await confirmAction(
-        `确定删除费用项目“${row.itemName}”吗？${tenantContext}删除后不可撤销；存在下级项目或费用引用时系统会阻止删除。`,
+        `确定删除费用项目“${row.itemName}”吗？删除后不可撤销；存在下级项目或费用引用时系统会阻止删除。`,
         '删除费用项目',
         {
           type: 'warning',
@@ -251,37 +212,4 @@
   function handleSaved(type: 'add' | 'edit'): void {
     void (type === 'add' ? tableRef.value?.refreshCreate() : tableRef.value?.refreshUpdate())
   }
-
-  async function loadTenantOptions(): Promise<void> {
-    if (!isPlatformSuper.value) return
-    const { data } = await fetchGetTenantList({ from: 0, to: 999 })
-    tenantOptions.value = (data ?? [])
-      .filter((tenant) => tenant.id)
-      .map((tenant) => ({
-        label: `${tenant.tenantName}（${tenant.tenantCode}）`,
-        value: String(tenant.id)
-      }))
-  }
-
-  onMounted(() => void loadTenantOptions())
 </script>
-
-<style scoped lang="scss">
-  :deep(.expense-item-tenant) {
-    min-width: 0;
-
-    strong,
-    small {
-      display: block;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    small {
-      margin-top: 3px;
-      font-size: 12px;
-      color: var(--el-text-color-secondary);
-    }
-  }
-</style>

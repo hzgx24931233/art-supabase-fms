@@ -25,7 +25,7 @@
                   <ElTag :type="riskTagType" effect="dark" round>{{ riskLabel }}</ElTag>
                   <ElTag type="info" effect="plain" round>{{ recommendationLabel }}</ElTag>
                 </div>
-                <p>分析当前租户 {{ assessment.metrics.openStatementCount }} 笔未关闭客户对账单</p>
+                <p>分析 {{ assessment.metrics.openStatementCount }} 笔未关闭客户对账单</p>
               </div>
             </div>
             <ElButton type="primary" plain :loading="state.loading" @click="loadAssessment">

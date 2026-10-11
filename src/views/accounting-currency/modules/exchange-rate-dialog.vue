@@ -40,7 +40,6 @@
 
   const createInitialForm = (): FormData => ({
     id: undefined,
-    tenantId: '',
     accountSetId: '',
     currencyId: '',
     rateDate: dayjs().format('YYYY-MM-DD'),
@@ -118,7 +117,6 @@
       await formRef.value?.validate()
       await saveExchangeRate({
         id: form.data.id,
-        tenantId: form.data.tenantId,
         accountSetId: form.data.accountSetId,
         currencyId: form.data.currencyId,
         rateDate: form.data.rateDate,
@@ -145,7 +143,6 @@
       .map((item) => ({ label: `${item.currencyName}（${item.currencyCode}）`, value: item.id }))
     Object.assign(form.data, createInitialForm(), {
       id: row?.id,
-      tenantId: accountSet.tenantId,
       accountSetId: accountSet.value,
       currencyId: row?.currencyId ?? selectedCurrency?.id ?? currencyOptions.value[0]?.value ?? '',
       rateDate: row?.rateDate ?? dayjs().format('YYYY-MM-DD'),
