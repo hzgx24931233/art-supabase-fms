@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="lg">
+  <ArtDialog ref="dialogRef" size="lg" confirm-on-close>
     <template #subtitle>
       报表行结构、取数方式和现金流方向均进入账套级配置；下拉枚举统一来自系统字典。
     </template>

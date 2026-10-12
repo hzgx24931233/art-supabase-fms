@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="md">
+  <ArtDialog ref="dialogRef" size="md" confirm-on-close>
     <template #subtitle>分组用于组织层级；可记账项目会出现在运单费用的必选字段中。</template>
     <ArtForm
       ref="formRef"

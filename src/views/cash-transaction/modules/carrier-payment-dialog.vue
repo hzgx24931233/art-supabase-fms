@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="xl">
+  <ArtDialog ref="dialogRef" size="xl" confirm-on-close>
     <CashVoucherOcrPanel
       v-if="dialog.mode === 'create'"
       ref="ocrPanelRef"

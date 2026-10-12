@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="lg">
+  <ArtDialog ref="dialogRef" size="lg" confirm-on-close>
     <template #subtitle
       >资产先以草稿登记；确认转固后进入折旧与处置生命周期，核心价值字段不可直接修改。</template
     >

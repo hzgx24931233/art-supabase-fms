@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="sm">
+  <ArtDialog ref="dialogRef" size="sm" confirm-on-close>
     <ElAlert
       class="invoice-counterparty-create__notice"
       :type="form.data.requiresReview ? 'warning' : 'info'"

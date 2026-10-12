@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="full">
+  <ArtDialog ref="dialogRef" size="full" confirm-on-close>
     <div class="voucher-dialog">
       <ArtForm
         ref="formRef"

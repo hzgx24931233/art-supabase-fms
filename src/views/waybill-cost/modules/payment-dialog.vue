@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="md">
+  <ArtDialog ref="dialogRef" size="md" confirm-on-close>
     <ElAlert class="payment-dialog__summary" type="success" :closable="false" show-icon>
       <template #title>
         <strong>{{ state.reimbursement?.reimbursementNo }}</strong>

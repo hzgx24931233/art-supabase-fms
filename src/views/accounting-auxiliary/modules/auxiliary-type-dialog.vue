@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="md">
+  <ArtDialog ref="dialogRef" size="md" confirm-on-close>
     <template #subtitle>
       系统维度的编码和主数据来源受保护；手工维度可用于企业自定义核算口径。
     </template>

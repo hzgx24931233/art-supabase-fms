@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="xl">
+  <ArtDialog ref="dialogRef" size="xl" confirm-on-close>
     <ElAlert v-if="ocrLoadError" type="error" :closable="false" show-icon>
       <template #title>{{ ocrLoadError }}</template>
       <ElButton link type="primary" @click="loadOcrResult">重新加载</ElButton>

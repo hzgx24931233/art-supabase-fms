@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="md"
+  <ArtDialog ref="dialogRef" size="md" confirm-on-close
     ><template #subtitle
       >税率由业务单据或财务人员录入，系统仅校验金额并汇总，不内置固定税率。</template
     ><ArtForm

@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="md">
+  <ArtDialog ref="dialogRef" size="md" confirm-on-close>
     <template #subtitle>类别定义折旧方法、默认使用寿命和残值率，新增资产时自动带入。</template>
     <ArtForm
       ref="formRef"

@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="sm">
+  <ArtDialog ref="dialogRef" size="sm" confirm-on-close>
     <ElAlert
       class="fund-execution-dialog__notice"
       :type="context.direction === 'inflow' ? 'success' : 'warning'"

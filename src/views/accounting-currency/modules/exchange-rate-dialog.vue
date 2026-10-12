@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="md">
+  <ArtDialog ref="dialogRef" size="md" confirm-on-close>
     <template #subtitle>
       直接汇率表示“1 单位外币可折算的本位币金额”，同一币种、日期和汇率类型仅保留一条记录。
     </template>

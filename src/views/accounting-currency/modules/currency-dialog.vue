@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="md">
+  <ArtDialog ref="dialogRef" size="md" confirm-on-close>
     <template #subtitle>
       本位币由账套初始化生成且不可变更；外币启用后可维护即期、平均及期末汇率。
     </template>

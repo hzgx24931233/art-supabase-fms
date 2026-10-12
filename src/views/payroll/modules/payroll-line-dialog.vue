@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="md"
+  <ArtDialog ref="dialogRef" size="md" confirm-on-close
     ><template #subtitle>金额构成按员工快照保存，不依赖后续人事档案变更。</template
     ><ArtForm
       ref="formRef"

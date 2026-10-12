@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="md">
+  <ArtDialog ref="dialogRef" size="md" confirm-on-close>
     <template #subtitle>
       手工项目仅适用于自定义或项目维度；业务同步维度请回到对应主数据维护。
     </template>

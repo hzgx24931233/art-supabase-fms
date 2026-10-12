@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="lg">
+  <ArtDialog ref="dialogRef" size="lg" confirm-on-close>
     <template #subtitle>
       先登记票面与往来信息，保存为草稿；确认收票或出票后进入受控生命周期，不再允许直接修改。
     </template>

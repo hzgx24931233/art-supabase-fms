@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="lg">
+  <ArtDialog ref="dialogRef" size="lg" confirm-on-close>
     <template #subtitle>
       账号仅在保存时用于生成掩码和不可逆指纹，系统不存储完整明文账号。
     </template>

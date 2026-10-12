@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="lg">
+  <ArtDialog ref="dialogRef" size="lg" confirm-on-close>
     <template #subtitle>
       下级科目编码必须以上级编码开头，并自动继承上级科目类别与余额方向。
     </template>

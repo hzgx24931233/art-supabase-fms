@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="md"
+  <ArtDialog ref="dialogRef" size="md" confirm-on-close
     ><template #subtitle
       >同一会计期间、同一税种仅保留一份台账；税率和调整金额不在前端硬编码。</template
     ><ArtForm

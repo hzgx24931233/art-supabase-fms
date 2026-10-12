@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="md"
+  <ArtDialog ref="dialogRef" size="md" confirm-on-close
     ><template #subtitle>每个会计期间仅保留一个薪资批次；创建后在明细工作台维护员工金额。</template
     ><ArtForm
       ref="formRef"

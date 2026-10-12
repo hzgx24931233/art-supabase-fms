@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="lg">
+  <ArtDialog ref="dialogRef" size="lg" confirm-on-close>
     <template #subtitle>
       调拨仅支持同账套、同币种账户；执行时转出账户扣减调拨金额与手续费，转入账户增加调拨金额。
     </template>

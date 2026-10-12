@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="xl">
+  <ArtDialog ref="dialogRef" size="xl" confirm-on-close>
     <section class="reimbursement-dialog__summary art-card-xs" aria-label="本次报销摘要">
       <article>
         <span class="is-primary"><ArtSvgIcon icon="ri:money-cny-circle-line" /></span>

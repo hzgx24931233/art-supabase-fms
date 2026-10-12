@@ -1,5 +1,5 @@
 <template>
-  <ArtDialog ref="dialogRef" size="sm">
+  <ArtDialog ref="dialogRef" size="sm" confirm-on-close>
     <ElAlert
       class="fixed-asset-disposal-dialog__notice"
       :type="disposalResult.type"
