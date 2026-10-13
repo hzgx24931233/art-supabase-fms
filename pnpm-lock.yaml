@@ -2016,7 +2016,7 @@ packages:
     engines: {node: '>= 0.4'}
 
   art-supabase-pro@file:../../packages/art-supabase-pro-1.0.0.tgz:
-    resolution: {integrity: sha512-VtkozGjs1sUTHA5reUmW0M7t2lXtDWBhJq1q5UuE1SIkDGcMcEYR8e9QUXcPfnoMCyUGENI74ZFuSy418PK02Q==, tarball: file:../../packages/art-supabase-pro-1.0.0.tgz}
+    resolution: {integrity: sha512-WMzbp8dm4ExvruD/x7id9Vv2WKLKcMlQROv/mg6Rn8ygUhpvBfikctpfRLhd9IBdRIClW6NiT1kWS0U5S0pyNA==, tarball: file:../../packages/art-supabase-pro-1.0.0.tgz}
     version: 1.0.0
     engines: {node: '>=22.0.0', pnpm: '>=11.9.0'}
 
