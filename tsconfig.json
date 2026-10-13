@@ -13,27 +13,11 @@
     "baseUrl": ".",
     "paths": {
       "@fms/*": ["src/*"],
-      "@/*": ["node_modules/art-supabase-pro/src/*", "../art-supabase-pro/src/*", "../../src/*"],
-      "@views/*": [
-        "node_modules/art-supabase-pro/src/views/*",
-        "../art-supabase-pro/src/views/*",
-        "../../src/views/*"
-      ],
-      "@styles/*": [
-        "node_modules/art-supabase-pro/src/assets/styles/*",
-        "../art-supabase-pro/src/assets/styles/*",
-        "../../src/assets/styles/*"
-      ],
-      "@utils/*": [
-        "node_modules/art-supabase-pro/src/utils/*",
-        "../art-supabase-pro/src/utils/*",
-        "../../src/utils/*"
-      ],
-      "@stores/*": [
-        "node_modules/art-supabase-pro/src/store/*",
-        "../art-supabase-pro/src/store/*",
-        "../../src/store/*"
-      ]
+      "@/*": ["node_modules/art-supabase-pro/src/*"],
+      "@views/*": ["node_modules/art-supabase-pro/src/views/*"],
+      "@styles/*": ["node_modules/art-supabase-pro/src/assets/styles/*"],
+      "@utils/*": ["node_modules/art-supabase-pro/src/utils/*"],
+      "@stores/*": ["node_modules/art-supabase-pro/src/store/*"]
     }
   },
   "include": [
