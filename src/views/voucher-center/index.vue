@@ -60,6 +60,7 @@
   import { useUserStore } from '@/store/modules/user'
   import { useArtFeedback } from '@/hooks/core/useArtFeedback'
   import { useAuth } from '@/hooks/core/useAuth'
+  import { useRowActionLoading } from '@/hooks/core/useRowActionLoading'
   import { pageInfoHandler } from '@/utils/table/tableUtils'
   import { formatWithDayjs } from '@/utils/time'
   import {
@@ -139,6 +140,7 @@
       ? (value as Api.Fms.VoucherStatus)
       : ''
   const tableQueryRef = ref<ArtTableQueryExpose>()
+  const rowActionLoading = useRowActionLoading()
   const dialogRef = ref<DialogExpose>()
   const actionDialogRef = ref<ActionDialogExpose>()
   const drawerRef = ref<DrawerExpose>()
@@ -378,7 +380,13 @@
                 </ElButton>
               ) : null}
               {hasAuth('FinanceVoucherCenter:Submit') ? (
-                <ElButton link type="success" onClick={() => void runSimpleAction(row, 'submit')}>
+                <ElButton
+                  link
+                  type="success"
+                  loading={rowActionLoading.isActive(row.id, 'submit')}
+                  disabled={rowActionLoading.isRowActive(row.id)}
+                  onClick={() => void runSimpleAction(row, 'submit')}
+                >
                   提交
                 </ElButton>
               ) : null}
@@ -396,7 +404,13 @@
           {row.status === 'pending_review' && (
             <>
               {hasAuth('FinanceVoucherCenter:Approve') ? (
-                <ElButton link type="success" onClick={() => void runSimpleAction(row, 'approve')}>
+                <ElButton
+                  link
+                  type="success"
+                  loading={rowActionLoading.isActive(row.id, 'approve')}
+                  disabled={rowActionLoading.isRowActive(row.id)}
+                  onClick={() => void runSimpleAction(row, 'approve')}
+                >
                   通过
                 </ElButton>
               ) : null}
@@ -414,7 +428,13 @@
           {row.status === 'approved' && (
             <>
               {hasAuth('FinanceVoucherCenter:Post') ? (
-                <ElButton link type="success" onClick={() => void runSimpleAction(row, 'post')}>
+                <ElButton
+                  link
+                  type="success"
+                  loading={rowActionLoading.isActive(row.id, 'post')}
+                  disabled={rowActionLoading.isRowActive(row.id)}
+                  onClick={() => void runSimpleAction(row, 'post')}
+                >
                   过账
                 </ElButton>
               ) : null}
@@ -563,10 +583,13 @@
         confirmButtonText: config.button,
         type: action === 'post' ? 'warning' : 'info'
       })
+      if (!rowActionLoading.start(row.id, action)) return
       await transitionVoucher(row.id, action)
       handleMutationSuccess()
     } catch {
       // 用户取消或操作失败时保留列表状态。
+    } finally {
+      rowActionLoading.stop(row.id, action)
     }
   }
 

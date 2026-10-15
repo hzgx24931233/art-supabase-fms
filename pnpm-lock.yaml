@@ -1923,6 +1923,7 @@ packages:
   '@xmldom/xmldom@0.9.11':
     resolution: {integrity: sha512-tW8bcK3hsG0/uqSnNz6TK4BkcuZSezoU7DlnYssILmZDktPnSHHuDJJFM0AJv+13gz2r0iGdrj6qqKeUnxXEDg==}
     engines: {node: '>=14.6'}
+    deprecated: this version has critical issues, please update to the latest version
 
   '@xmldom/xmldom@0.9.12':
     resolution: {integrity: sha512-5AXjrcMClTryPe9LgZrygpB1lj7s0S9E0+W+AHaVKAVyHanafK86iPSvG5xHVSp/jC+VH1UXu0TAEmY279xH7A==}
@@ -2016,7 +2017,7 @@ packages:
     engines: {node: '>= 0.4'}
 
   art-supabase-pro@file:../../packages/art-supabase-pro-1.0.0.tgz:
-    resolution: {integrity: sha512-WMzbp8dm4ExvruD/x7id9Vv2WKLKcMlQROv/mg6Rn8ygUhpvBfikctpfRLhd9IBdRIClW6NiT1kWS0U5S0pyNA==, tarball: file:../../packages/art-supabase-pro-1.0.0.tgz}
+    resolution: {integrity: sha512-EwoS5qTtMtMhPx6nyd+lzouscLV5y9Bpt1xtwibbVehQmyncB0I8qAiufc3yR6feouT5xOb44UWaTIx9ErwNAA==, tarball: file:../../packages/art-supabase-pro-1.0.0.tgz}
     version: 1.0.0
     engines: {node: '>=22.0.0', pnpm: '>=11.9.0'}
 
@@ -4372,10 +4373,6 @@ packages:
   strictdom@1.0.1:
     resolution: {integrity: sha512-cEmp9QeXXRmjj/rVp9oyiqcvyocWab/HaoN4+bwFeZ7QzykJD6L3yD4v12K1x0tHpqRqVpJevN3gW7kyM39Bqg==}
 
-  string-width@4.2.0:
-    resolution: {integrity: sha512-zUz5JD+tgqtuDjMhwIg5uFVV3dtqZ9yQJlZVfq4I01/K5Paj5UHj7VyrQOJvzawSVlKpObApbfD0Ed6yJc+1eg==}
-    engines: {node: '>=8'}
-
   string-width@4.2.3:
     resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==}
     engines: {node: '>=8'}
@@ -4757,6 +4754,7 @@ packages:
 
   uuid@8.3.0:
     resolution: {integrity: sha512-fX6Z5o4m6XsXBdli9g7DtWgAx+osMsRRZFKma1mIUsLCz6vRvv+pz5VNbyu9UEDzpMWulZfvpgb/cmDXVulYFQ==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   verkit@0.3.2:
@@ -5737,7 +5735,7 @@ snapshots:
   '@isaacs/cliui@8.0.2':
     dependencies:
       string-width: 5.1.2
-      string-width-cjs: string-width@4.2.0
+      string-width-cjs: string-width@4.2.3
       strip-ansi: 7.2.0
       strip-ansi-cjs: strip-ansi@6.0.1
       wrap-ansi: 8.1.0
@@ -9588,12 +9586,6 @@ snapshots:
 
   strictdom@1.0.1: {}
 
-  string-width@4.2.0:
-    dependencies:
-      emoji-regex: 8.0.0
-      is-fullwidth-code-point: 3.0.0
-      strip-ansi: 6.0.1
-
   string-width@4.2.3:
     dependencies:
       emoji-regex: 8.0.0
@@ -10244,7 +10236,7 @@ snapshots:
   wrap-ansi@7.0.0:
     dependencies:
       ansi-styles: 4.0.0
-      string-width: 4.2.0
+      string-width: 4.2.3
       strip-ansi: 6.0.1
 
   wrap-ansi@8.1.0:

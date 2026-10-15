@@ -340,7 +340,7 @@
     })
     await dialogRef.value?.handleOpen(undefined, {
       title: row ? `编辑期初余额 · ${row.subject?.subjectCode ?? ''}` : '录入期初余额',
-      confirmText: row ? '保存修改' : '保存余额',
+      confirmText: row ? '保存' : '保存余额',
       contentMaxHeight: '70vh',
       onConfirm: handleSubmit,
       onOpen: () => formRef.value?.clearValidate(),

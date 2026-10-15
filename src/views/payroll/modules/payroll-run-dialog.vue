@@ -146,7 +146,7 @@
     }
     await dialogRef.value?.handleOpen(undefined, {
       title: row ? `编辑薪资批次 · ${row.runNo}` : '新建薪资批次',
-      confirmText: row ? '保存修改' : '创建批次',
+      confirmText: row ? '保存' : '创建批次',
       loading: true,
       loadingText: '正在加载薪资批次与账套…',
       onConfirm: submit,

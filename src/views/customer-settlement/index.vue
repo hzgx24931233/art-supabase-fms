@@ -71,6 +71,7 @@
   } from '@/utils/field-permission'
   import { useArtFeedback } from '@/hooks/core/useArtFeedback'
   import { useAuth } from '@/hooks/core/useAuth'
+  import { useRowActionLoading } from '@/hooks/core/useRowActionLoading'
   import CustomerStatementDialog from './modules/customer-statement-dialog.vue'
   import CustomerStatementDetailDrawer from './modules/customer-statement-detail-drawer.vue'
   import BusinessWorkspaceHeader from '@/components/business/business-workspace-header/index.vue'
@@ -99,6 +100,7 @@
   const route = useRoute()
   const customerDeleteContext = useMasterDataDeleteProcessingContext()
   const tableQueryRef = ref<ArtTableQueryExpose>()
+  const rowActionLoading = useRowActionLoading()
   const dialogRef = ref<DialogExpose>()
   const drawerRef = ref<DrawerExpose>()
   const customerOptions = ref<Array<{ label: string; value: string }>>([])
@@ -248,7 +250,13 @@
       return (
         <>
           {hasAuth('FinanceCustomerSettlement:Submit') ? (
-            <ElButton link type="primary" onClick={() => void handleSubmitReview(row)}>
+            <ElButton
+              link
+              type="primary"
+              loading={rowActionLoading.isActive(row.id, 'submit')}
+              disabled={rowActionLoading.isRowActive(row.id)}
+              onClick={() => void handleSubmitReview(row)}
+            >
               提交审核
             </ElButton>
           ) : null}
@@ -264,12 +272,24 @@
       return (
         <>
           {hasAuth('FinanceCustomerSettlement:Approve') ? (
-            <ElButton link type="success" onClick={() => void handleApprove(row)}>
+            <ElButton
+              link
+              type="success"
+              loading={rowActionLoading.isActive(row.id, 'approve')}
+              disabled={rowActionLoading.isRowActive(row.id)}
+              onClick={() => void handleApprove(row)}
+            >
               审核通过
             </ElButton>
           ) : null}
           {hasAuth('FinanceCustomerSettlement:Reject') ? (
-            <ElButton link type="danger" onClick={() => void handleReject(row)}>
+            <ElButton
+              link
+              type="danger"
+              loading={rowActionLoading.isActive(row.id, 'reject')}
+              disabled={rowActionLoading.isRowActive(row.id)}
+              onClick={() => void handleReject(row)}
+            >
               驳回
             </ElButton>
           ) : null}
@@ -278,7 +298,13 @@
     }
     if (row.status === 'confirmed') {
       return hasAuth('FinanceCustomerSettlement:Void') ? (
-        <ElButton link type="danger" onClick={() => void handleVoid(row)}>
+        <ElButton
+          link
+          type="danger"
+          loading={rowActionLoading.isActive(row.id, 'void')}
+          disabled={rowActionLoading.isRowActive(row.id)}
+          onClick={() => void handleVoid(row)}
+        >
           作废
         </ElButton>
       ) : null
@@ -376,6 +402,7 @@
           cancelButtonText: '取消'
         }
       )
+      if (!rowActionLoading.start(row.id, 'submit')) return
       await updateCustomerStatementStatus({
         id: row.id,
         status: 'pending_review',
@@ -384,6 +411,8 @@
       await tableQueryRef.value?.refreshUpdate()
     } catch {
       // 用户取消时无需提示。
+    } finally {
+      rowActionLoading.stop(row.id, 'submit')
     }
   }
 
@@ -397,10 +426,13 @@
         confirmButtonText: '通过',
         cancelButtonText: '取消'
       })
+      if (!rowActionLoading.start(row.id, 'approve')) return
       await updateCustomerStatementStatus({ id: row.id, status: 'confirmed' })
       await tableQueryRef.value?.refreshUpdate()
     } catch {
       // 用户取消时无需提示。
+    } finally {
+      rowActionLoading.stop(row.id, 'approve')
     }
   }
 
@@ -411,6 +443,7 @@
         emptyMessage: '驳回原因不能为空',
         placeholder: '请说明对账单被驳回的原因'
       })
+      if (!rowActionLoading.start(row.id, 'reject')) return
       await updateCustomerStatementStatus({
         id: row.id,
         status: 'draft',
@@ -419,6 +452,8 @@
       await tableQueryRef.value?.refreshUpdate()
     } catch {
       // 用户取消时无需提示。
+    } finally {
+      rowActionLoading.stop(row.id, 'reject')
     }
   }
 
@@ -433,6 +468,7 @@
           emptyMessage: '作废原因不能为空'
         }
       )
+      if (!rowActionLoading.start(row.id, 'void')) return
       await updateCustomerStatementStatus({
         id: row.id,
         status: 'voided',
@@ -441,6 +477,8 @@
       await tableQueryRef.value?.refreshUpdate()
     } catch {
       // 用户取消时无需提示。
+    } finally {
+      rowActionLoading.stop(row.id, 'void')
     }
   }
 

@@ -170,7 +170,7 @@
     })
     await dialogRef.value?.handleOpen(undefined, {
       title: row ? `编辑维度 · ${row.typeName}` : '新增辅助核算维度',
-      confirmText: row ? '保存修改' : '创建维度',
+      confirmText: row ? '保存' : '创建维度',
       contentMaxHeight: '65vh',
       onConfirm: handleSubmit,
       onOpen: () => formRef.value?.clearValidate(),

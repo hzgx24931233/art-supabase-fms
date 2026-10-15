@@ -702,7 +702,7 @@
         data.ocrResult || data.loadOcrResult
           ? '识别字段已恢复为草稿，请绑定运单并完成人工核对后再保存'
           : '按费用项目和运单统一归集承运、在途及其他业务成本',
-      confirmText: data.row ? '保存修改' : '保存草稿',
+      confirmText: data.row ? '保存' : '保存草稿',
       contentMaxHeight: '78vh',
       loading: true,
       loadingText: '正在准备运单费用…',

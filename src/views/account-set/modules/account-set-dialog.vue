@@ -350,7 +350,7 @@
       { row },
       {
         title: row ? `编辑账套 · ${row.accountSetName}` : '新建企业账套',
-        confirmText: row ? '保存修改' : '创建账套',
+        confirmText: row ? '保存' : '创建账套',
         contentMaxHeight: '72vh',
         onConfirm: handleSubmit,
         onOpen: () => formRef.value?.clearValidate(),

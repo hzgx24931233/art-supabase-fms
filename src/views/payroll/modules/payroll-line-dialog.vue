@@ -130,7 +130,7 @@
     })
     await dialogRef.value?.handleOpen(undefined, {
       title: line ? `编辑薪资 · ${line.employeeNameSnapshot}` : '新增员工薪资',
-      confirmText: '保存明细',
+      confirmText: line ? '保存' : '新增',
       loading: true,
       loadingText: '正在加载员工选项…',
       onConfirm: submit,

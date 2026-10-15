@@ -1221,7 +1221,7 @@
       subtitle: ocrContext
         ? '识别结果已恢复，请重点核对低置信字段、往来单位和金额勾稽关系'
         : '发票可以关联一个或多个已确认对账单，未关联金额会进入财务工作台待办',
-      confirmText: row ? '保存修改' : '保存草稿',
+      confirmText: row ? '保存' : '保存草稿',
       contentMaxHeight: '76vh',
       loading: true,
       loadingText: '正在准备发票…',

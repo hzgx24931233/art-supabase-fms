@@ -295,7 +295,7 @@
 
     await dialogRef.value?.handleOpen(undefined, {
       title: `${editable.value ? '配置' : '查看'}${isFormula.value ? '报表公式' : '科目取数'}`,
-      confirmText: '保存取数规则',
+      confirmText: '保存',
       showFooter: editable.value,
       contentMaxHeight: '72vh',
       loading: item.calculationMethod === 'formula',

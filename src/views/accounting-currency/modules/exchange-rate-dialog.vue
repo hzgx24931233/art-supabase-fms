@@ -153,7 +153,7 @@
     })
     await dialogRef.value?.handleOpen(undefined, {
       title: row ? '编辑汇率' : '新增汇率',
-      confirmText: row ? '保存修改' : '保存汇率',
+      confirmText: row ? '保存' : '保存汇率',
       onConfirm: handleSubmit,
       onOpen: () => formRef.value?.clearValidate(),
       dialogProps: { closeOnClickModal: false }

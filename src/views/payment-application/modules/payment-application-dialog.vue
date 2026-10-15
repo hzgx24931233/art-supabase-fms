@@ -591,7 +591,7 @@
     await dialogRef.value?.handleOpen(row, {
       title: row ? `编辑付款申请 · ${row.applicationNo}` : '新建承运商付款申请',
       subtitle: '审批通过前锁定可付款额度，通过后再登记实际付款凭证并自动核销',
-      confirmText: row ? '保存修改' : '保存草稿',
+      confirmText: row ? '保存' : '保存草稿',
       contentMaxHeight: '78vh',
       loading: true,
       loadingText: '正在准备付款申请…',

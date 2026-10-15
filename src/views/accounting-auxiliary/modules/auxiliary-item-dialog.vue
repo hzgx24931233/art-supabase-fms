@@ -145,7 +145,7 @@
     })
     await dialogRef.value?.handleOpen(undefined, {
       title: row ? `编辑项目 · ${row.itemName}` : `新增项目 · ${type.typeName}`,
-      confirmText: row ? '保存修改' : '创建项目',
+      confirmText: row ? '保存' : '创建项目',
       contentMaxHeight: '65vh',
       onConfirm: handleSubmit,
       onOpen: () => formRef.value?.clearValidate(),

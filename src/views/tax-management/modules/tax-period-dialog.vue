@@ -198,7 +198,7 @@
     }
     await dialogRef.value?.handleOpen(undefined, {
       title: row ? '编辑税务期间' : '新建税务期间',
-      confirmText: row ? '保存修改' : '创建台账',
+      confirmText: row ? '保存' : '创建台账',
       loading: true,
       loadingText: '正在加载税务期间与账套…',
       onConfirm: submit,

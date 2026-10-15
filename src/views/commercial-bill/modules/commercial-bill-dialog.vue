@@ -363,7 +363,7 @@
     }
     await dialogRef.value?.handleOpen(undefined, {
       title: row ? `编辑票据 · ${row.billNo}` : '新建商业票据',
-      confirmText: row ? '保存修改' : '创建草稿',
+      confirmText: row ? '保存' : '创建草稿',
       loading: true,
       loadingText: '正在加载票据与账套…',
       onConfirm: handleSubmit,

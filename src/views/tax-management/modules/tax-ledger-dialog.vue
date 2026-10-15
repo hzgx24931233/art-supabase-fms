@@ -124,7 +124,7 @@
     })
     await dialogRef.value?.handleOpen(undefined, {
       title: line ? '编辑税务明细' : '新增税务明细',
-      confirmText: '保存明细',
+      confirmText: line ? '保存' : '新增',
       onConfirm: submit,
       onOpen: () => formRef.value?.clearValidate(),
       dialogProps: { closeOnClickModal: false }

@@ -168,7 +168,7 @@
     })
     await dialogRef.value?.handleOpen(undefined, {
       title: row ? `编辑币种 · ${row.currencyCode}` : '新增核算币种',
-      confirmText: row ? '保存修改' : '创建币种',
+      confirmText: row ? '保存' : '创建币种',
       onConfirm: handleSubmit,
       onOpen: () => formRef.value?.clearValidate(),
       dialogProps: { closeOnClickModal: false }

@@ -363,7 +363,7 @@
     }
     await dialogRef.value?.handleOpen(undefined, {
       title: row ? `编辑资金账户 · ${row.accountName}` : '新建资金账户',
-      confirmText: row ? '保存修改' : '创建账户',
+      confirmText: row ? '保存' : '创建账户',
       loading: true,
       loadingText: '正在加载账套与币种…',
       onConfirm: handleSubmit,

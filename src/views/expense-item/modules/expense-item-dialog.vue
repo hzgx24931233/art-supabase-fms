@@ -191,7 +191,7 @@
           : parent
             ? `新增“${parent.itemName}”下级`
             : '新增一级费用项目',
-        confirmText: row ? '保存修改' : '确认新增',
+        confirmText: row ? '保存' : '确认新增',
         onConfirm: handleSubmit,
         onOpen: () => formRef.value?.clearValidate(),
         dialogProps: { appendToBody: true, closeOnClickModal: false }

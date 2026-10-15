@@ -76,6 +76,7 @@
   import { financePaths } from '@/router/business-paths'
   import { useArtFeedback } from '@/hooks/core/useArtFeedback'
   import { useAuth } from '@/hooks/core/useAuth'
+  import { useRowActionLoading } from '@/hooks/core/useRowActionLoading'
   import BusinessWorkspaceHeader from '@/components/business/business-workspace-header/index.vue'
   import BusinessTableWorkspaceActions from '@/components/business/business-table-workspace-actions/index.vue'
   import MasterDeleteProcessingNotice from '@/components/business/master-delete-processing-notice/index.vue'
@@ -124,6 +125,7 @@
   const invoiceManagementPath = financePaths.invoiceManagement
   const tableQueryRef = ref<ArtTableQueryExpose>()
   const dialogRef = ref<DialogExpose>()
+  const rowActionLoading = useRowActionLoading()
   const drawerRef = ref<DrawerExpose>()
   const auditDrawerRef = ref<AuditDrawerExpose>()
   const fieldAccess = ref<Api.Fms.InvoiceFieldAccessMap>({})
@@ -230,7 +232,13 @@
             </ElButton>
           ) : null}
           {hasAuth('FinanceInvoiceManagement:Submit') ? (
-            <ElButton link type="primary" onClick={() => void handleStatusAction(row, 'submit')}>
+            <ElButton
+              link
+              type="primary"
+              loading={rowActionLoading.isActive(row.id, 'submit')}
+              disabled={rowActionLoading.isRowActive(row.id)}
+              onClick={() => void handleStatusAction(row, 'submit')}
+            >
               提交复核
             </ElButton>
           ) : null}
@@ -245,12 +253,24 @@
       return (
         <>
           {hasAuth('FinanceInvoiceManagement:Approve') ? (
-            <ElButton link type="success" onClick={() => void handleStatusAction(row, 'approve')}>
+            <ElButton
+              link
+              type="success"
+              loading={rowActionLoading.isActive(row.id, 'approve')}
+              disabled={rowActionLoading.isRowActive(row.id)}
+              onClick={() => void handleStatusAction(row, 'approve')}
+            >
               审核通过
             </ElButton>
           ) : null}
           {hasAuth('FinanceInvoiceManagement:Reject') ? (
-            <ElButton link type="danger" onClick={() => void handleRemarkAction(row, 'reject')}>
+            <ElButton
+              link
+              type="danger"
+              loading={rowActionLoading.isActive(row.id, 'reject')}
+              disabled={rowActionLoading.isRowActive(row.id)}
+              onClick={() => void handleRemarkAction(row, 'reject')}
+            >
               驳回
             </ElButton>
           ) : null}
@@ -258,7 +278,13 @@
       )
     if (row.status === 'issued' || row.status === 'certified')
       return hasAuth('FinanceInvoiceManagement:Void') ? (
-        <ElButton link type="danger" onClick={() => void handleRemarkAction(row, 'void')}>
+        <ElButton
+          link
+          type="danger"
+          loading={rowActionLoading.isActive(row.id, 'void')}
+          disabled={rowActionLoading.isRowActive(row.id)}
+          onClick={() => void handleRemarkAction(row, 'void')}
+        >
           作废
         </ElButton>
       ) : null
@@ -417,6 +443,7 @@
       await confirmAction(`确定${label}发票 ${row.invoiceNo || row.invoiceRecordNo} 吗？`, label, {
         type: 'warning'
       })
+      if (!rowActionLoading.start(row.id, statusAction)) return
       await updateInvoiceStatus({
         id: row.id,
         action: statusAction,
@@ -425,6 +452,8 @@
       await tableQueryRef.value?.refreshUpdate()
     } catch {
       // 用户取消或业务校验未通过
+    } finally {
+      rowActionLoading.stop(row.id, statusAction)
     }
   }
 
@@ -438,6 +467,7 @@
         confirmButtonText: statusAction === 'reject' ? '确认驳回' : '确认作废',
         placeholder: `请填写${label}原因`
       })
+      if (!rowActionLoading.start(row.id, statusAction)) return
       await updateInvoiceStatus({
         id: row.id,
         action: statusAction,
@@ -447,6 +477,8 @@
       await tableQueryRef.value?.refreshUpdate()
     } catch {
       // 用户取消或业务校验未通过
+    } finally {
+      rowActionLoading.stop(row.id, statusAction)
     }
   }
 

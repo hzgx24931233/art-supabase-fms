@@ -374,7 +374,7 @@
 
     await dialogRef.value?.handleOpen(undefined, {
       title: row ? `编辑科目 · ${row.subjectCode}` : '新增会计科目',
-      confirmText: row ? '保存修改' : '创建科目',
+      confirmText: row ? '保存' : '创建科目',
       contentMaxHeight: '72vh',
       onConfirm: handleSubmit,
       onOpen: () => formRef.value?.clearValidate(),

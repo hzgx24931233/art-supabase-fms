@@ -369,7 +369,7 @@
     }
     await dialogRef.value?.handleOpen(undefined, {
       title: row ? `编辑资产 · ${row.assetNo}` : '新建固定资产',
-      confirmText: row ? '保存修改' : '创建草稿',
+      confirmText: row ? '保存' : '创建草稿',
       loading: true,
       loadingText: '正在加载资产与账套…',
       onConfirm: submit,

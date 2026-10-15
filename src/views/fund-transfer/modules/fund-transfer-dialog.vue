@@ -410,7 +410,7 @@
     }
     await dialogRef.value?.handleOpen(undefined, {
       title: row ? `编辑资金调拨 · ${row.transferNo}` : '新建资金调拨',
-      confirmText: row ? '保存修改' : '创建草稿',
+      confirmText: row ? '保存' : '创建草稿',
       loading: true,
       loadingText: '正在加载资金账户…',
       onConfirm: handleSubmit,

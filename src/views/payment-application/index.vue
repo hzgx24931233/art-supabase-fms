@@ -75,6 +75,7 @@
   } from '@/utils/field-permission'
   import { useArtFeedback } from '@/hooks/core/useArtFeedback'
   import { useAuth } from '@/hooks/core/useAuth'
+  import { useRowActionLoading } from '@/hooks/core/useRowActionLoading'
   import BusinessWorkspaceHeader from '@/components/business/business-workspace-header/index.vue'
   import BusinessTableWorkspaceActions from '@/components/business/business-table-workspace-actions/index.vue'
   import PaymentApplicationDialog from './modules/payment-application-dialog.vue'
@@ -116,6 +117,7 @@
   const { hasAuth } = useAuth()
   const deleteContext = useMasterDataDeleteProcessingContext()
   const tableQueryRef = ref<ArtTableQueryExpose>()
+  const rowActionLoading = useRowActionLoading()
   const dialogRef = ref<DialogExpose>()
   const executeDialogRef = ref<ExecuteDialogExpose>()
   const drawerRef = ref<DrawerExpose>()
@@ -268,7 +270,13 @@
           {['draft', 'rejected'].includes(row.status) && (
             <>
               {hasAuth('FinanceCarrierPaymentApplication:Submit') ? (
-                <ElButton link type="primary" onClick={() => void handleSubmit(row)}>
+                <ElButton
+                  link
+                  type="primary"
+                  loading={rowActionLoading.isActive(row.id, 'submit')}
+                  disabled={rowActionLoading.isRowActive(row.id)}
+                  onClick={() => void handleSubmit(row)}
+                >
                   提交审批
                 </ElButton>
               ) : null}
@@ -363,10 +371,13 @@
         '提交付款审批',
         { confirmButtonText: '提交审批', type: 'warning' }
       )
+      if (!rowActionLoading.start(row.id, 'submit')) return
       await submitCarrierPaymentApplication(row)
       await tableQueryRef.value?.refreshUpdate()
     } catch {
       // 用户取消或提交失败时保持当前列表状态。
+    } finally {
+      rowActionLoading.stop(row.id, 'submit')
     }
   }
 
